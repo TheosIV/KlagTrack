@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KlagTrack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>KlagTrack</h1>
+        </header>
+        <nav>
+            <button id="nav-today" class="active">Today</button>
+            <button id="nav-overview">Overview</button>
+            <button id="nav-history">History</button>
+        </nav>
+        <main>
+            <div id="today-tab" class="tab-content active">
+                <form id="daily-form">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="hours">Hours Worked:</label>
+                <input type="number" id="hours" name="hours" min="0" step="0.1" placeholder="e.g., 8">
+
+                <label for="tips">Tips Earned (€):</label>
+                <input type="number" id="tips" name="tips" min="0" step="0.01" placeholder="e.g., 25.50">
+
+                <h3>Expenses</h3>
+                <div id="expense-list">
+                    <!-- Dynamic expense entries will be added here -->
+                </div>
+                <button type="button" id="add-expense-btn">Add Expense</button>
+
+                <h4>Preset Expenses</h4>
+                <div id="preset-expenses">
+                    <button type="button" class="preset-expense-btn" data-category="Coffee" data-amount="3.50">Coffee (3.50€)</button>
+                    <button type="button" class="preset-expense-btn" data-category="Lunch" data-amount="12.00">Lunch (12.00€)</button>
+                    <button type="button" class="preset-expense-btn" data-category="Groceries" data-amount="50.00">Groceries (50.00€)</button>
+                </div>
+
+                <label for="notes">Notes:</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Any details about the day..."></textarea>
+
+                <div class="form-actions">
+                    <button type="button" id="copy-prev-day-btn">Copy Previous Day</button>
+                    <button type="submit" id="save-btn">Save</button>
+                </div>
+            </form>
+
+            <div id="daily-summary">
+                <h3>Today's Summary</h3>
+                <p>Hourly Rate: <span id="summary-hourly-rate">0.00</span>€</p>
+                <p>Total Income: <span id="summary-income">0.00</span>€</p>
+                <p>Total Expenses: <span id="summary-expenses">0.00</span>€</p>
+                <p>Net: <span id="summary-net">0.00</span>€</p>
+            </div>
+        </div>
+        <div id="overview-tab" class="tab-content">
+            <div class="overview-section">
+                <h3>This Month</h3>
+                <div id="monthly-summary-container">
+                    <p>Total Income: <span id="overview-month-income">0.00€</span></p>
+                    <p>Total Expenses: <span id="overview-month-expenses">0.00€</span></p>
+                    <p>Taxable Income: <span id="overview-month-taxable">0.00€</span></p>
+                    <p>Tax Due (20%): <span id="overview-month-tax">0.00€</span></p>
+                    <p>Net Savings: <span id="overview-month-net">0.00€</span></p>
+                </div>
+            </div>
+
+            <div class="overview-section">
+                <h3>This Week</h3>
+                <div id="weekly-summary-container">
+                     <p>Total Income: <span id="overview-week-income">0.00€</span></p>
+                     <p>Total Expenses: <span id="overview-week-expenses">0.00€</span></p>
+                     <p>Net: <span id="overview-week-net">0.00€</span></p>
+                </div>
+            </div>
+
+            <div class="overview-section">
+                <h3>Goals</h3>
+                <div class="goal-setter">
+                    <label for="weekly-goal">Weekly Income Goal:</label>
+                    <input type="number" id="weekly-goal" placeholder="e.g., 500">
+                    <button id="set-goal-btn">Set Goal</button>
+                </div>
+                <p>Weekly Progress:</p>
+                <div class="progress-bar-container">
+                    <div id="weekly-progress-bar" class="progress-bar" style="width: 0%;"></div>
+                </div>
+                <span id="weekly-progress-text">0/500€</span>
+            </div>
+
+            <div class="overview-section">
+                <h3>Monthly Trend</h3>
+                <div id="chart-container">
+                    <!-- Simple bar chart will be rendered here -->
+                </div>
+            </div>
+        </div>
+        <div id="history-tab" class="tab-content">
+            <h2>Past Months</h2>
+            <div id="history-list-container">
+                <!-- Monthly summary cards will be generated here -->
+            </div>
+            <div class="export-section">
+                <button id="export-data-btn">Export All Data (JSON)</button>
+            </div>
+        </div>
+    </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
