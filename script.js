@@ -303,12 +303,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (maxIncome === 0) maxIncome = 100; // Avoid division by zero
 
         dailyIncomes.forEach((income, index) => {
+            const barWrapper = document.createElement('div');
+            barWrapper.classList.add('chart-bar-wrapper');
+
             const bar = document.createElement('div');
+            bar.classList.add('chart-bar');
             bar.style.height = `${(income / maxIncome) * 100}%`;
-            bar.style.width = '2.5%';
-            bar.style.backgroundColor = '#007bff';
-            bar.title = `Day ${index + 1}: ${income.toFixed(2)}€`;
-            chartContainer.appendChild(bar);
+
+            const tooltip = document.createElement('div');
+            tooltip.classList.add('chart-tooltip');
+            tooltip.textContent = `Day ${index + 1}: ${income.toFixed(2)}€`;
+
+            barWrapper.appendChild(bar);
+            barWrapper.appendChild(tooltip);
+            chartContainer.appendChild(barWrapper);
         });
     }
 
@@ -403,9 +411,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Theme Switcher ---
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const body = document.body;
+
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggleBtn.textContent = '☀️';
+        } else {
+            body.classList.remove('dark-mode');
+            themeToggleBtn.textContent = '🌙';
+        }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+        const isDarkMode = body.classList.contains('dark-mode');
+        const newTheme = isDarkMode ? 'light' : 'dark';
+        localStorage.setItem('klagTrackTheme', newTheme);
+        applyTheme(newTheme);
+    });
+
     // --- Initialization ---
 
     function initialize() {
+        const savedTheme = localStorage.getItem('klagTrackTheme') || 'light';
+        applyTheme(savedTheme);
+
         weeklyGoalInput.value = weeklyGoal;
         currentData = loadDataFromLocalStorage();
         dateInput.value = getTodayDateString();

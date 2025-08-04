@@ -1,27 +1,147 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     background-color: #f0f2f5;
     color: #333;
 }
 
 header {
-    background-color: #fff;
+    background-color: transparent;
     padding: 1rem;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h1 {
     margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+h2 {
     font-size: 1.5rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+#theme-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+}
+
+/* --- Dark Mode --- */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background-color: transparent;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4 {
+    color: #f5f5f5;
+}
+
+body.dark-mode nav {
+    background-color: transparent;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode nav button {
+    color: #e0e0e0;
+}
+
+body.dark-mode nav button.active {
+    border-bottom-color: #4a90e2;
+    color: #4a90e2;
+}
+
+body.dark-mode #daily-form input,
+body.dark-mode #daily-form textarea,
+body.dark-mode .goal-setter input {
+    background-color: #333;
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode #daily-form input::placeholder,
+body.dark-mode #daily-form textarea::placeholder {
+    color: #888;
+}
+
+body.dark-mode #daily-summary,
+body.dark-mode .overview-section,
+body.dark-mode .history-card {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode #chart-container {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .chart-bar {
+    background-color: #4a90e2;
+}
+
+body.dark-mode .chart-bar-wrapper:hover .chart-bar {
+    background-color: #357abd;
+}
+
+body.dark-mode .chart-tooltip {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+body.dark-mode .progress-bar-container {
+    background-color: #444;
+}
+
+body.dark-mode .progress-bar {
+    background-color: #4a90e2;
+}
+
+body.dark-mode #theme-toggle-btn {
+    color: #e0e0e0;
+}
+
+body.dark-mode .expense-item .remove-expense-btn {
+    color: #ff6b6b;
+}
+
+body.dark-mode #copy-prev-day-btn {
+    background-color: #f0ad4e;
+    color: #1a1a1a;
+}
+
+body.dark-mode #export-data-btn {
+    background-color: #5bc0de;
+    color: #1a1a1a;
 }
 
 nav {
     display: flex;
     justify-content: space-around;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 nav button {
@@ -42,10 +162,20 @@ nav button.active {
 .tab-content {
     display: none;
     padding: 1rem;
+    animation: fadeIn 0.5s;
 }
 
 .tab-content.active {
     display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* Form Styling */
@@ -139,9 +269,9 @@ nav button.active {
 #daily-summary {
     margin-top: 2rem;
     padding: 1rem;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
 }
 
 #daily-summary h3 {
@@ -170,9 +300,9 @@ nav button.active {
 .overview-section {
     margin-bottom: 2rem;
     padding: 1rem;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
 }
 
 .overview-section h3 {
@@ -220,7 +350,7 @@ nav button.active {
     justify-content: center;
     color: white;
     font-size: 0.8rem;
-    transition: width 0.4s ease;
+    transition: width 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 #weekly-progress-text {
@@ -232,13 +362,54 @@ nav button.active {
 
 #chart-container {
     min-height: 200px;
-    /* Basic styling for chart area */
     display: flex;
     align-items: flex-end;
     justify-content: space-around;
-    border: 1px solid #eee;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 1rem;
-    background: #fafafa;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    position: relative;
+}
+
+.chart-bar-wrapper {
+    position: relative;
+    width: 2.5%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.chart-bar {
+    width: 100%;
+    background-color: #4a90e2;
+    border-radius: 3px 3px 0 0;
+    transition: all 0.3s ease;
+}
+
+.chart-bar-wrapper:hover .chart-bar {
+    background-color: #357abd;
+}
+
+.chart-tooltip {
+    position: absolute;
+    bottom: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.chart-bar-wrapper:hover .chart-tooltip {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* History Tab Styling */
@@ -249,9 +420,9 @@ nav button.active {
 }
 
 .history-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
     padding: 1rem;
 }
 
@@ -312,9 +483,10 @@ nav button {
 
 #daily-form button:hover,
 .goal-setter button:hover,
-#export-data-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+#export-data-btn:hover,
+.preset-expense-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 
@@ -324,14 +496,25 @@ nav button {
     body {
         /* Add a subtle background color for the area outside the main container */
         background-color: #e9ecef;
+        background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #7ab3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+        background-attachment: fixed;
     }
 
     .container {
         max-width: 800px;
         margin: 2rem auto;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        border-radius: 8px;
+        border-radius: 15px;
         overflow: hidden;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    body.dark-mode .container {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     header {
@@ -339,7 +522,7 @@ nav button {
     }
 
     main {
-        background-color: #f8f9fa;
+        background-color: transparent;
         padding: 1.5rem;
     }
 
